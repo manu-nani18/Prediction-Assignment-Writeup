@@ -1,0 +1,9 @@
+#2. Model Training
+
+set.seed(1234)
+rf_model <- train(classe ~ ., data = trainData, method = "rf", trControl = trainControl(method = "cv", number = 5))
+print(rf_model)
+#Train a Gradient Boosted Model (GBM):
+set.seed(1234)
+gbm_model <- train(classe ~ ., data = trainData, method = "gbm", trControl = trainControl(method = "cv", number = 5), verbose = FALSE)
+print(gbm_model)

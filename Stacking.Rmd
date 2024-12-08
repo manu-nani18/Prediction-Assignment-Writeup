@@ -1,0 +1,18 @@
+#4. Stacking
+#Combine predictions and train a stacking model:
+
+# Combine predictions
+stack_train <- data.frame(rf = predict(rf_model, trainData),
+                          gbm = predict(gbm_model, trainData),
+                          classe = trainData$classe)
+
+# Train a stacking model
+stack_model <- train(classe ~ ., data = stack_train, method = "rf")
+
+# Evaluate stacking model
+stack_valid <- data.frame(rf = rf_pred, gbm = gbm_pred)
+stack_pred <- predict(stack_model, stack_valid)
+
+# Confusion matrix for stacking model
+stack_conf <- confusionMatrix(stack_pred, validData$classe)
+stack_conf$overall["Accuracy"]  # Stacking accuracy

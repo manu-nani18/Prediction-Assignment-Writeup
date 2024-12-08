@@ -1,0 +1,6 @@
+#Predictions on Test Data
+Use the best model (Random Forest or Stacking) to make predictions on the test set:
+
+# Predict using the best model
+final_pred <- predict(rf_model, testing)  # Replace with stack_model if stacking is better
+final_pred

@@ -1,0 +1,36 @@
+# 1. Data Preparation
+#Load the data:
+# Load required libraries
+library(caret)
+library(randomForest)
+library(gbm)
+
+# Load datasets
+training <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv")
+testing <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv")
+
+# Inspect the data
+dim(training)   # 19622 rows and 160 columns
+dim(testing)    # 20 rows and 160 columns
+Data cleaning and preprocessing:
+
+
+# Remove near-zero variance predictors
+nzv <- nearZeroVar(training, saveMetrics = TRUE)
+training <- training[, !nzv$nzv]
+testing <- testing[, !nzv$nzv]
+
+# Remove columns with mostly NA values
+training <- training[, colSums(is.na(training)) == 0]
+testing <- testing[, colSums(is.na(testing)) == 0]
+
+# Remove irrelevant variables
+training <- training[, -c(1:7)]  # Remove ID, timestamps, etc.
+testing <- testing[, -c(1:7)]
+Split the training data for cross-validation:
+
+
+set.seed(1234)
+inTrain <- createDataPartition(training$classe, p = 0.7, list = FALSE)
+trainData <- training[inTrain, ]
+validData <- training[-inTrain, ]

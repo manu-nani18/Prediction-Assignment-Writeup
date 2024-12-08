@@ -1,0 +1,14 @@
+#3. Model Evaluation
+Evaluate the models on the validation set:
+
+# Predict on validation set
+rf_pred <- predict(rf_model, validData)
+gbm_pred <- predict(gbm_model, validData)
+
+# Confusion matrices
+rf_conf <- confusionMatrix(rf_pred, validData$classe)
+gbm_conf <- confusionMatrix(gbm_pred, validData$classe)
+
+# Print accuracy
+rf_conf$overall["Accuracy"]  # Random Forest accuracy
+gbm_conf$overall["Accuracy"] # GBM accuracy

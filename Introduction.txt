@@ -1,0 +1,17 @@
+Introduction
+The project predicts how well exercises are performed using sensor data.
+The goal is to classify classe using other features from accelerometers.
+Data Preprocessing
+Removed near-zero variance predictors.
+Removed columns with too many missing values.
+Split data into training, validation, and testing sets.
+Model Training
+Random Forest achieved high accuracy with 5-fold cross-validation.
+GBM also performed well but was slightly less accurate than Random Forest.
+Model Evaluation
+Random Forest: Accuracy ~0.99
+GBM: Accuracy ~0.96
+Stacking further improved performance to ~0.995.
+Conclusion
+The stacking model provided the best performance.
+Final predictions submitted based on the stacking model.
